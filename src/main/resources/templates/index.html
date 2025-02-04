@@ -83,16 +83,7 @@
     </style>
 </head>
 <body>
-    <div >
-    <ul>
-            <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/users}">Users</a></li>
-            <li><a th:href="@{/departments}">Departments</a></li>
-            <li><a th:href="@{/pesticides}">Pesticides</a></li>
-        </ul>
-    
-    
-    </div>
+    <div th:replace="fragments/top-menu.html :: top-menu"></div>
 	
     <div class="container">
         <h1>Welcome to Plant Care Management System</h1>

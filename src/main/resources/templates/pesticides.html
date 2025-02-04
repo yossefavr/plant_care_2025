@@ -7,14 +7,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <div class="navbar">
-        <h1>Plant Care Management</h1>
-        <ul class="menu">
-            <li><a href="/users">Users</a></li>
-            <li><a href="/departments">Departments</a></li>
-            <li><a href="/pesticides">Pesticides</a></li>
-        </ul>
-    </div>
+    <div th:replace="fragments/top-menu.html :: top-menu"></div>
 
     <!-- Pesticides Table -->
     <div class="container">

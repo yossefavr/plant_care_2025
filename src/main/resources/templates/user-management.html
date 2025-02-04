@@ -8,14 +8,7 @@
 <body>
 
 	<!-- Navbar -->
-    <div class="navbar">
-        <h1>Plant Care Management</h1>
-        <ul class="menu">
-            <li><a href="/users">Users</a></li>
-            <li><a href="/departments">Departments</a></li>
-        </ul>
-    </div>
-    
+    <div th:replace="fragments/top-menu.html :: top-menu"></div>
     <h1>User Management</h1>
 
     <!-- Form for Adding or Editing a User -->
