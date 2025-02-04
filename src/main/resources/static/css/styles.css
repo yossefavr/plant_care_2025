@@ -5,29 +5,6 @@ body {
     background-color: #f4f4f4;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-}
-
-.navbar h1 {
-    margin: 0;
-}
-
-.menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-.menu li {
-    margin: 0 10px;
-}
 
 .menu a {
     color: white;
