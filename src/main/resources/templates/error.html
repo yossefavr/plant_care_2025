@@ -4,6 +4,7 @@
     <title>Error</title>
 </head>
 <body>
+	<div th:replace="fragments/top-menu.html :: top-menu"></div>
     <h1>Oops! Something went wrong.</h1>
     <p th:text="'Error Message: ' + ${message}"></p>
     <p th:text="'Error Type: ' + ${error}"></p>
