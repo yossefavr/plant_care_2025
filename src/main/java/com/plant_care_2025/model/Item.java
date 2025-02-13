@@ -12,7 +12,7 @@ public class Item {
     private Long id;
 
     private String name;
-    private double price;
+    private int price;
     
 
 
@@ -28,11 +28,11 @@ public class Item {
 		this.name = name;
 	}
 	
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 	
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 }
