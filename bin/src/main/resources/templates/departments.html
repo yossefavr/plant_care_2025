@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+     <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+	
+	<div th:replace="fragments/top-menu.html :: top-menu"></div>
+	
+    <h1>Departments</h1>
+
+    <!-- Form for Adding/Editing a Department -->
+    <form th:action="@{/departments/save}" th:object="${department}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label for="name">Department Name:</label>
+        <input type="text" id="name" th:field="*{name}" placeholder="Enter department name" required />
+        <button type="submit">Save</button>
+    </form>
+
+    <!-- Table to Display Departments -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="department : ${departments}">
+                <td th:text="${department.id}"></td>
+                <td th:text="${department.name}"></td>
+                <td>
+                    <a th:href="@{/departments/edit/{id}(id=${department.id})}">Edit</a> |
+                    <a th:href="@{/departments/delete/{id}(id=${department.id})}" 
+                       onclick="return confirm('Are you sure you want to delete this department?');">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

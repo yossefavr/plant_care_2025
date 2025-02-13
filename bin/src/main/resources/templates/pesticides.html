@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pesticides</title>
+     <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div th:replace="fragments/top-menu.html :: top-menu"></div>
+
+    <!-- Pesticides Table -->
+    <div class="container">
+        <h1>Pesticides</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pesticide : ${pesticides}">
+                    <td th:text="${pesticide.id}"></td>
+                    <td th:text="${pesticide.name}"></td>
+                    <td th:text="${pesticide.type}"></td>
+                    <td th:text="${pesticide.description}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
