@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Information - Formatted</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .weather-info {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .weather-info h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .weather-info p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        .weather-info .temp {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .weather-info .condition {
+            font-size: 22px;
+            color: #7f8c8d;
+        }
+        .raw-json {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Weather Information</h1>
+
+    <div class="weather-info">
+        <h2>Weather Data</h2>
+        <p><strong>Latitude:</strong> <span th:text="${lat}"></span></p>
+        <p><strong>Longitude:</strong> <span th:text="${lon}"></span></p>
+        <p class="temp" th:text="${weather.split('\n')[0]}"></p>
+        <p class="condition" th:text="${weather.split('\n')[1]}"></p>
+        <p><strong>Humidity:</strong> <span th:text="${weather.split('\n')[2]}"></span></p>
+
+        <a href="/weather" class="back-link">Back to the Basic Weather Form</a>
+    </div>
+
+    <!-- Display Raw JSON Data for Other Uses -->
+    <div class="raw-json">
+        <h2>Raw JSON Data:</h2>
+        <pre th:text="${weather}"></pre>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .weather-info {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .weather-info h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .weather-info p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        .error-message {
+            color: red;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .weather-info .temp {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .weather-info .condition {
+            font-size: 22px;
+            color: #7f8c8d;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+	<div th:replace="fragments/top-menu.html :: top-menu"></div>
+    <h1>Weather Information</h1>
+
+    <!-- Display Error Message if Coordinates are Missing -->
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+
+    <div class="weather-info">
+        <h2>Weather Data</h2>
+        <form action="/weather" method="get">
+            <label for="lat">Latitude:</label>
+            <input type="text" id="lat" name="lat" required>
+            <label for="lon">Longitude:</label>
+            <input type="text" id="lon" name="lon" required>
+            <button type="submit">Get Weather</button>
+        </form>
+
+        <div th:if="${weather}">
+            <p><strong>Latitude:</strong> <span th:text="${lat}"></span></p>
+            <p><strong>Longitude:</strong> <span th:text="${lon}"></span></p>
+            <p class="temp" th:text="${weather.split('\n')[0]}"></p>
+            <p class="condition" th:text="${weather.split('\n')[1]}"></p>
+            <p><strong>Humidity:</strong> <span th:text="${weather.split('\n')[2]}"></span></p>
+        </div>
+
+        <a href="/weather" class="back-link">Back to the Basic Weather Form</a>
+    </div>
+
+</body>
+</html>
+31.249624259880456, 34.78898813078744

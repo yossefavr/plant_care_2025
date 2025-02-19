@@ -13,7 +13,7 @@
 	
     <h1>Items</h1>
 
-    <!-- Form for Adding/Editing a Item -->
+    <!-- Form for Adding/Editing an Item -->
     <form th:action="@{/items/save}" th:object="${item}" method="post">
         <input type="hidden" th:field="*{id}" />
         <label for="name">Item Name:</label>
