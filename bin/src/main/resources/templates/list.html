@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List Example</title>
+</head>
+<body>
+    <h1>Dynamic List</h1>
+    <ul>
+        <!-- Iterate over the list using th:each -->
+        <li th:each="item : ${items}" th:text="${item}">Sample Item</li>
+    </ul>
+</body>
+
