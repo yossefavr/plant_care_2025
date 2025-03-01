@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accounts</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div th:replace="fragments/top-menu.html :: top-menu"></div>
+    
+    <h1>Manage Accounts</h1>
+
+    <!-- Form for Adding/Editing an Account -->
+    <form th:action="@{/accounts/save}" th:object="${account}" method="post">
+        <label for="accountNumber">Account Number:</label>
+        <input type="text" id="accountNumber" th:field="*{accountNumber}" 
+               th:attr="readonly=${account.accountNumber != null}" required />
+
+        <label for="accountType">Account Type:</label>
+        <select id="accountType" th:field="*{accountType}" required>
+            <option value="">Select Account Type</option>
+            <option value="Checking">Checking</option>
+            <option value="Savings">Savings</option>
+            <option value="Business">Business</option>
+        </select>
+
+        <label for="balance">Balance:</label>
+        <input type="number" step="0.01" id="balance" th:field="*{balance}" required />
+
+        <button type="submit">Save</button>
+    </form>
+
+    <!-- Table to Display Accounts -->
+    <table>
+        <thead>
+            <tr>
+                <th>Account Number</th>
+                <th>Account Type</th>
+                <th>Balance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="account : ${accounts}">
+                <td th:text="${account.accountNumber}"></td>
+                <td th:text="${account.accountType}"></td>
+                <td th:text="${account.balance}"></td>
+                <td>
+                    <a th:href="@{/accounts/edit/{accountNumber}(accountNumber=${account.accountNumber})}">Edit</a> |
+                    <a th:href="@{/accounts/delete/{accountNumber}(accountNumber=${account.accountNumber})}" 
+                       onclick="return confirm('Are you sure you want to delete this account?');">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
