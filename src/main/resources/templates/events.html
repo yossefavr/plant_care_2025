@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>events</title>
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+	<div th:replace="fragments/top-menu.html :: top-menu"></div>
+
+	<h1>Events</h1>
+
+	<!-- Form for Adding/Editing a Item -->
+	<form th:action="@{/events/save}" th:object="${event}" method="post">
+		<input type="hidden" th:field="*{id}" /> 
+		<label for="eventName">Event Name:</label> 
+		<input type="text" id="eventName" th:field="*{eventName}" placeholder="Enter event name" required /> 
+		<label for="eventDate">Event Date:</label> 
+		<input type="date" id="eventDate" th:field="*{eventDate}" placeholder="Enter event date" required /> 
+		<label for="amount">Event Amount:</label> 
+		<input type="number" id="amount" th:field="*{amount}" placeholder="Enter event amount" required />
+		<button type="submit">Save</button>
+	</form>
+
+	<!-- Table to Display events -->
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Amount</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="event : ${events}">
+				<td th:text="${event.id}"></td>
+				<td th:text="${event.eventName}"></td>
+				<td th:text="${event.amount}"></td>
+				<td th:text="${event.eventDate}"></td>
+				<td><a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
+					<a th:href="@{/events/delete/{id}(id=${event.id})}"
+					onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>
