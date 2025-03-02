@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <!-- Link to the external navbar CSS -->
+   
+</head>
+<body>
+    <!-- Using Thymeleaf fragment for navbar -->
+    <div th:fragment="top-menu" class="navbar">
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/users}">Users</a></li>
+                <li><a th:href="@{/departments}">Departments</a></li>
+                <li><a th:href="@{/pesticides}">Pesticides</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
+																		
