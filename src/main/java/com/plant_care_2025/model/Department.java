@@ -1,9 +1,4 @@
 
-
-
-
-
-
 package com.plant_care_2025.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
