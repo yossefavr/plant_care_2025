@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Items</title>
+     <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+	
+	<div th:replace="fragments/top-menu.html :: top-menu"></div>
+	
+    <h1>Items</h1>
+
+    <!-- Form for Adding/Editing a Item -->
+    <form th:action="@{/items/save}" th:object="${item}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label for="name">Item Name:</label>
+        <input type="text" id="name" th:field="*{name}" placeholder="Enter Item name" required />
+		<label for="price">Item Price:</label>
+		<input type="number" id="price" th:field="*{price}" placeholder="Enter Item price" required/>
+        <button type="submit">Save</button>
+    </form>
+
+    <!-- Table to Display Items -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+				<th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+				<td th:text="${item.price}"></td>
+                <td>
+                    <a th:href="@{/items/edit/{id}(id=${item.id})}">Edit</a> |
+                    <a th:href="@{/items/delete/{id}(id=${item.id})}" 
+                       onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
