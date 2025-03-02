@@ -1,33 +1,43 @@
 package com.plant_care_2025.controller;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-@RequestMapping("/plants")
 public class ArielYeshayahuController{
-    @Autowired
-    private PlantService plantService;
 
-    @GetMapping
-    public String listPlants(Model model) {
-        List<Plant> plants = plantService.getAllPlants();
-        model.addAttribute("plants", plants);
-        return "plants";
+    @GetMapping("/user")
+    public String getUserDetails(Model model) {
+        // Example user data - replace with actual data retrieval logic
+        User user = new User("Ariel Yeshayhu", "ariel@example.com", "2025-02-28");
+
+        model.addAttribute("user", user);
+        return "ArielYeshayhu"; // Thymeleaf template name
     }
 
-    @PostMapping("/add")
-    public String addPlant(@ModelAttribute Plant plant) {
-        plantService.savePlant(plant);
-        return "redirect:/plants";
-    }
+    // User class for demonstration purposes
+    static class User {
+        private String username;
+        private String email;
+        private String lastVisit;
 
-    @GetMapping("/delete/{id}")
-    public String deletePlant(@PathVariable Long id) {
-        plantService.deletePlant(id);
-        return "redirect:/plants";
+        public User(String username, String email, String lastVisit) {
+            this.username = username;
+            this.email = email;
+            this.lastVisit = lastVisit;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getLastVisit() {
+            return lastVisit;
+        }
     }
 }
