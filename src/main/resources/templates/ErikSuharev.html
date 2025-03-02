@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Add your CSS file if needed -->
+</head>
+<body>
+    <h2>User Information</h2>
+    <div>
+        <label>Username:</label>
+        <span th:text="${user.username}"></span>
+    </div>
+    <div>
+        <label>Email:</label>
+        <span th:text="${user.email}"></span>
+    </div>
+    <div>
+        <label>Last Visit:</label>
+        <span th:text="${user.lastVisit}"></span>
+    </div>
+</body>
+</html>
