@@ -20,9 +20,6 @@ public class User {
 	 	@Column(name = "username", unique = true, nullable = false)
 	    private String userName;
 
-
-
-
 		@Column(name = "first_name", nullable = false)
 	    private String firstName;
 

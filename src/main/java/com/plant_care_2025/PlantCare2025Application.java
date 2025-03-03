@@ -10,5 +10,4 @@ public class PlantCare2025Application {
         SpringApplication.run(PlantCare2025Application.class, args);
     }
 
-
 }

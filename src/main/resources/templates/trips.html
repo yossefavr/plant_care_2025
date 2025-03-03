@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trips</title>
+     <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+	
+	<div th:replace="fragments/top-menu.html :: top-menu"></div>
+	
+    <h1>Trips</h1>
+
+    <!-- Form for Adding/Editing a Department -->
+	<form th:action="@{/trips/save}" th:object="${trip}" method="post" autocomplete="off">
+	    <div>
+	        <input type="hidden" th:field="*{id}" />
+	        <div>
+	            <label for="tripName">Trip name:</label>
+	            <input type="text" id="tripName" th:field="*{tripName}" required />
+	        </div>
+	        <div>
+	            <label for="start_destenation">start destenation :</label>
+	            <input type="text" id="start_destenation" th:field="*{start_destenation}" required />
+	        </div>
+	        <div>
+	            <label for="endDestenation">endDestenation :</label>
+	            <input type="text" id="endDestenation" th:field="*{endDestenation}" required />
+	        </div>
+	 
+	        <div>
+	            <button type="submit">Save</button>
+	        </div>
+	     </div>
+	    </form>
+
+    <!-- Table to Display Departments -->
+	<table>
+	        <thead>
+	            <tr>
+	                <th>Trip Name:</th>
+	                <th>start Destenation:</th>
+	                <th>End Destenation:</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="trip : ${trips}">
+	                <td th:text="${trip.tripName}"></td>
+	                <td th:text="${trip.start_destenation}"></td>
+	                <td th:text="${trip.endDestenation}"></td>
+	                <td>
+	                    <a th:href="@{/trips/edit/{id}(id=${trip.id})}">Edit</a>
+	                    <a th:href="@{/trips/delete/{id}(id=${trip.id})}" onclick="return confirm('Are you sure?');">Delete</a>
+	                </td>
+	            </tr>
+	        </tbody>
+	    </table>
+</body>
+</html>
