@@ -36,7 +36,9 @@ public class User {
 	    @JoinColumn(name = "authority_id") // Foreign key to authority table
 	    private Authority role;
 
-	    public Long getId() {
+
+
+	public Long getId() {
 			return id;
 		}
 
