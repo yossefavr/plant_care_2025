@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dog Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            justify-content: center;
+        }
+
+        .navbar nav li {
+            margin-right: 20px;
+        }
+
+        .navbar nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .navbar nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px white;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        .action-buttons a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #ffdf6d;
+            font-weight: bold;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Dog Manager</h1>
+
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Breed</th>
+            <th>Owner</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dog : ${dogs}">
+            <td th:text="${dog.id}">ID</td>
+            <td th:text="${dog.name}">Dog Name</td>
+            <td th:text="${dog.breed}">Breed</td>
+            <td th:text="${dog.owner}">Owner</td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href="#" onclick="toggleForm('create')">Create</a></li>
+                <li><a href="#" onclick="toggleForm('edit')">Update</a></li>
+                <li><a href="#" onclick="toggleForm('delete')">Delete</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="create-form" class="form-section" th:classappend="${newDog.id == null} ? 'active'">
+        <h2>Add a New Dog</h2>
+        <form th:action="@{/maor/save}" th:object="${newDog}" method="post">
+            <label>Name: <input type="text" th:field="*{name}" /></label>
+            <label>Breed: <input type="text" th:field="*{breed}" /></label>
+            <label>Owner: <input type="text" th:field="*{owner}" /></label>
+            <button type="submit">Add Dog</button>
+        </form>
+    </div>
+
+    <div id="edit-form" class="form-section" th:classappend="${newDog.id != null} ? 'active'">
+        <h2>Edit Dog</h2>
+        <form th:action="@{/maor/edit}" th:object="${newDog}" method="post">
+            <label> dog ID:<input type="number" th:field="*{id}" /></label>
+            <label>Name: <input type="text" th:field="*{name}" /></label>
+            <label>Breed: <input type="text" th:field="*{breed}" /></label>
+            <label>Owner: <input type="text" th:field="*{owner}" /></label>
+            <button type="submit">Update Dog</button>
+        </form>
+    </div>
+
+    <div id="delete-form" class="form-section">
+        <h2>Delete Dog by ID</h2>
+        <form th:action="@{/maor/deleteById}" method="post">
+            <label>Dog ID to delete: <input type="number" name="id" required /></label>
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleForm(mode) {
+        const createForm = document.getElementById('create-form');
+        const editForm = document.getElementById('edit-form');
+        const deleteForm = document.getElementById('delete-form');
+
+        createForm.classList.remove('active');
+        editForm.classList.remove('active');
+        deleteForm.classList.remove('active');
+
+        if (mode === 'create') {
+            createForm.classList.add('active');
+        } else if (mode === 'edit') {
+            editForm.classList.add('active');
+        } else if (mode === 'delete') {
+            deleteForm.classList.add('active');
+        }
+    }
+</script>
+
+</body>
+</html>
